@@ -16,7 +16,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Modificar Registro</title>
-    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.0.0-beta.4/dist/css/bootstrap-material-design.min.css" integrity="sha384-R80DC0KVBO4GSTw+wZ5x2zn2pu4POSErBkf8/fSFhPXHxvHJydT0CSgAP2Yo2r4I" crossorigin="anonymous">
     <link rel="shortcut icon" href="favicon.png">
 </head>
 <body>
@@ -25,16 +26,13 @@
                 <body>
                     <div class="container">
             
-                    <nav class="navbar navbar-light bg-light">
+                    <nav class="navbar navbar-dark bg-dark">
                         <img src="resources/ues.png"  alt="Banner" class="align-self-start mr-3">
-                        <span class="navbar-brand mb-0 h1">Programacion III - UES FMO</span>
+                        <span class="navbar-brand mb-0 h1">Guia de Restaurantes</span>
                     </nav>
             
-                    <nav class="navbar navbar-expand-sm bg-light navbar-light">
+                    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
                         <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link" href="main.jsp">Home</a>
-                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="registro.jsp">Registro</a>
                             </li>
@@ -51,43 +49,12 @@
                         String S_ID;
                         %>
                         
-                        <%
+                        <% 
                             S_ID = request.getParameter("ID");
-                            int ID = Integer.parseInt(S_ID);
-                            
-                            try {
-                                Class.forName("org.postgresql.Driver");
-                            } catch (ClassNotFoundException ex) {
-                                ex.printStackTrace();
-                            }
-                    
-                            BaseDatos base = new BaseDatos();
-                            Restaurante restaurantes = base.restauranteByID(ID);
-                    
-                    int id = restaurantes.getId();
-                    String nombre = restaurantes.getNombre();
-                    String tipoComida = restaurantes.getTipoComida();
-                    String direccion = restaurantes.getDireccion();
-                    int telefono = restaurantes.getTelefono(); 
-                    String horarios = restaurantes.getHorarios();
-                    String propietarios = restaurantes.getPropietarios();
-                    String coordenadas = restaurantes.getCoordenadas();
-                    Double clasificacion = restaurantes.getClasificacion();                   
-            
-                    out.println("<h2>"+id+"</h2>");
-                    out.println("<h2>"+nombre+"</h2>");
-                    out.println("<h2>"+tipoComida+"</h2>");
-                    out.println("<h2>"+direccion+"</h2>");
-                    out.println("<h2>"+telefono+"</h2>");
-                    out.println("<h2>"+horarios+"</h2>");
-                    out.println("<h2>"+propietarios+"</h2>");
-                    out.println("<h2>"+coordenadas+"</h2>");
-                    out.println("<h2>"+clasificacion+"</h2>");
+                            int I_ID = Integer.parseInt(S_ID);
+                            //out.println(I_ID);
                         %>
-                        
-                        <h1> <%=S_ID %></h1>
-                        
-                    <form action="Modificar_Servlet" method="POST">        
+                    <form action="Modificar_Servlet" method="POST" autocomplete="off">        
                             <div class="container">
                                 <form class="form-horizontal" role="form" method="POST" action="/login">
                                 
@@ -104,7 +71,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group has-danger">
                                                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                                                            <input id="ID" type="text" class="form-control" name="ID" placeholder="ID" disabled required>
+                                                            <input id="IDForm" type="text" class="form-control" name="IDForm" value="" readonly required>
                                                         </div>
                                                     </div>
                                             </div>
@@ -115,7 +82,7 @@
                                             <div class="col-md-6">
                                                 <div class="form-group has-danger">
                                                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                                                        <input id="nombre" type="text" class="form-control" name="nombre" placeholder="Nombre" required>
+                                                        <input id="nombre" type="text" class="form-control" name="nombre" placeholder="Nombre" value="" required>
                                                     </div>
                                                 </div>
                                         </div>
@@ -126,7 +93,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                                                        <input id="tipoComida" type="text" class="form-control" name="tipoComida" placeholder="Tipo de Comida" required>
+                                                        <input id="tipoComida" type="text" class="form-control" name="tipoComida" placeholder="Tipo de Comida" value="" required>
                                                     </div>
                                             </div>
                                         </div>
@@ -137,7 +104,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                                                        <input id="direccion" type="text" class="form-control" name="direccion" placeholder="Direccion" required>
+                                                        <input id="direccion" type="text" class="form-control" name="direccion" placeholder="Direccion" value="" required>
                                                     </div>
                                             </div>
                                         </div>
@@ -148,7 +115,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                                                        <input id="numTel" type="text" class="form-control" name="numTel" placeholder="Numero de telefono" required>
+                                                        <input id="numTel" type="text" class="form-control" name="numTel" placeholder="Numero de telefono" value="" required>
                                                     </div>
                                             </div>
                                         </div>
@@ -159,7 +126,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                                                        <input id="horarios" type="text" class="form-control" name="horarios" placeholder="Horarios" required>
+                                                        <input id="horarios" type="text" class="form-control" name="horarios" placeholder="Horarios" value="" required>
                                                     </div>
                                             </div>
                                         </div>
@@ -170,7 +137,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                                                        <input id="propietario" type="text" class="form-control" name="propietario" placeholder="Propietario (Opcional)">
+                                                        <input id="propietario" type="text" class="form-control" name="propietario" placeholder="Propietario (Opcional)" value="">
                                                     </div>
                                             </div>
                                         </div>
@@ -181,7 +148,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                     <div class="input-group mb-2 mr-sm-2 mb-sm-0">
-                                                        <input id="coordenadas" type="text" class="form-control" name="coordenadas" placeholder="Coordenadas (Opcional)">
+                                                        <input id="coordenadas" type="text" class="form-control" name="coordenadas" placeholder="Coordenadas (Opcional)" value="">
                                                     </div>
                                             </div>
                                         </div>
@@ -199,6 +166,43 @@
                             </div>
                         </form>
 
+                        <%
+                            
+                            try {
+                                Class.forName("org.postgresql.Driver");
+                            } catch (ClassNotFoundException ex) {
+                                ex.printStackTrace();
+                            }
+                    
+                            BaseDatos base = new BaseDatos();
+                            Restaurante restaurantes = base.restauranteByID(I_ID);
+                    
+                            
+                            
+                    int id = restaurantes.getId();
+                    String nombre = restaurantes.getNombre();
+                    String tipoComida = restaurantes.getTipoComida();
+                    String direccion = restaurantes.getDireccion();
+                    int telefono = restaurantes.getTelefono(); 
+                    String horarios = restaurantes.getHorarios();
+                    String propietarios = restaurantes.getPropietarios();
+                    String coordenadas = restaurantes.getCoordenadas();
+                    Double clasificacion = restaurantes.getClasificacion();
+                    
+                    out.println("<script>");
+                    out.println("document.getElementById('IDForm').value ='"+id+"'");
+                    out.println("document.getElementById('nombre').value = '"+nombre+"'");
+                    out.println("document.getElementById('tipoComida').value = '"+tipoComida+"'");
+                    out.println("document.getElementById('direccion').value = '"+direccion+"'");
+                    out.println("document.getElementById('numTel').value = '"+telefono+"'");
+                    out.println("document.getElementById('horarios').value = '"+horarios+"'");
+                    out.println("document.getElementById('propietario').value = '"+propietarios+"'");
+                    out.println("document.getElementById('coordenadas').value = '"+coordenadas+"'"); 
+                    out.println("</script>");  
+                    
+                    
+                        %>
+                        
     </main>
 
     <footer class="footer">

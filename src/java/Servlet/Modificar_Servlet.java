@@ -5,6 +5,8 @@
  */
 package Servlet;
 
+import Factory.Factory;
+import Procesos.BaseDatos;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -19,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "Modificar_Servlet", urlPatterns = {"/Modificar_Servlet"})
 public class Modificar_Servlet extends HttpServlet {
-
+private static Factory factory;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -72,7 +74,60 @@ public class Modificar_Servlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        factory = new Factory();
+        BaseDatos base = factory.baseDatos();
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        
+        System.out.print("TU MAMA SE LA COME TODA"+request.getParameter("IDForm"));
+        int idMOD = Integer.parseInt(request.getParameter("IDForm")); 
+        String nombre = request.getParameter("nombre");
+        String tipoComida = request.getParameter("tipoComida");
+        String direccion = request.getParameter("direccion");
+        int telefono = Integer.parseInt(request.getParameter("numTel")); 
+        String horarios = request.getParameter("horarios");
+        String propietarios = request.getParameter("propietario");
+        String coordenadas = request.getParameter("coordenadas");
+        Double clasificacion = null;
+        
+        boolean exitoso = base.modificarRestaurante(idMOD, nombre, tipoComida, direccion, telefono, horarios, propietarios, coordenadas, clasificacion);
+        
+        if (exitoso == true){
+            request.setCharacterEncoding("UTF-8");
+            PrintWriter out = response.getWriter();  
+            out.println("<meta charset='UTF-8'>");
+            out.println("<head>"
+                        + "<title>Registro Exitoso</title>\n" +
+                        "<link rel=\"stylesheet\" href=\"css/bootstrap.min.css\">"
+                        + "</head>");
+            out.println("<div align=\"center\">");
+            out.println("<h1>Se ha actualizado correctamente a la base de Datos</br><hr></h1>");
+            //out.println("<h1>ID: "+idMOD+"</h1>");
+            out.println("<h1>Nombre: "+nombre+"</h1>");
+            out.println("<h1>Tipo de Comida: "+tipoComida+"</h1>");
+            out.println("<h1>Direccion: "+direccion+"</h1>");
+            out.println("<h1>Telefono: "+telefono+"</h1>");
+            out.println("<h1>Horarios: "+horarios+"</h1>");
+            out.println("<h1>Propietarios: "+propietarios+"</h1>");
+            out.println("<h1>Coordenadas: "+coordenadas+"</h1>");
+            out.println("<a class=\"btn btn-primary btn-lg\" href=\"restaurantes.jsp\">Atras</a>");
+            out.println("</div>");
+        }else{
+            //ex.printStackTrace();
+            System.out.println("Error en el try2");
+            request.setCharacterEncoding("UTF-8");
+            PrintWriter out = response.getWriter();  
+            out.println("<meta charset='UTF-8'>");
+            out.println("<head>"
+                        + "<title>Error al modificar</title>\n" +
+                        "<link rel=\"stylesheet\" href=\"css/bootstrap.min.css\">"
+                        + "</head>");
+                        out.println("<h1>Ocurrio un error al modificar la Base de Datos</h12>");
+        }
+       processRequest(request, response);
     }
 
     /**

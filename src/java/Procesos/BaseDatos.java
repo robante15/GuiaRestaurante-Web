@@ -20,7 +20,7 @@ public class BaseDatos {
     PreparedStatement st = null;
     ResultSet rs = null;
     
-    String url = "jdbc:postgresql://localhost:5432/RestorantApp";
+    String url = "jdbc:postgresql://190.87.217.209:5432/RestorantApp";
     String username = "postgres";
     String password = "0000";
     
@@ -41,6 +41,37 @@ public class BaseDatos {
             st.setString(5, restaurante.getHorarios());
             st.setString(6, restaurante.getPropietarios());
             st.setString(7, restaurante.getCoordenadas());
+            st.executeUpdate();
+            
+            exitoso = true;
+            
+            
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            exitoso = false;
+        }
+        finally{
+            try {
+                st.close();
+            } catch (SQLException ex) {
+                exitoso = false;
+                ex.printStackTrace();
+            }
+        }
+    return exitoso;
+    }
+    
+    public boolean modificarRestaurante(int id, String nombre, String tipoComida, String direccion, int telefono, String horarios, String propietarios, String coordenadas, Double clasificacion){
+        boolean exitoso = false;
+        factory = new Factory();
+        try {
+            conn = DriverManager.getConnection(url, username, password);
+            String SQLQuery = "UPDATE public.restaurantes "
+                    + "SET nombre='"+nombre+"', tipo_comida='"+tipoComida+"', direccion='"+direccion+"', telefono="+telefono+", "
+                    + "horarios='"+horarios+"', propietario='"+propietarios+"', coordenadas ='"+coordenadas+"' "
+                    + "WHERE id_restaurante="+id+"";
+            st = conn.prepareStatement(SQLQuery);
             st.executeUpdate();
             
             exitoso = true;
