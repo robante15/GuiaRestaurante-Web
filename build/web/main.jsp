@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="css/bootstrap.css">
         <link rel="shortcut icon" href="favicon.png">
     </head>
+    <main role="main" class="container">
     <body>
         <div class="container">
 
@@ -34,6 +35,9 @@
                   <li class="nav-item">
                     <a class="nav-link" href="restaurantes.jsp">Tabla de Restaurantes</a>
                   </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="modificar.jsp">Modificar Registro</a>
+                  </li>
                 </ul>
             </nav>
 
@@ -49,6 +53,7 @@
                 </div>
             </div>
 
+    </main>
             <footer class="footer">
                 <div class="container">
                     <span class="text-muted">Realizado por Roberto Antonio Ortiz Acevedo - OA14002</span>

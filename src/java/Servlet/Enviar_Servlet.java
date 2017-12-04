@@ -26,8 +26,8 @@ import javax.swing.JOptionPane;
  *
  * @author robante15
  */
-@WebServlet(name = "Servlet", urlPatterns = {"/newServlet"})
-public class newServlet extends HttpServlet {
+@WebServlet(name = "Servlet", urlPatterns = {"/Enviar_Servlet"})
+public class Enviar_Servlet extends HttpServlet {
     private static Factory factory;
     
     /**
@@ -107,9 +107,6 @@ public class newServlet extends HttpServlet {
         String coordenadas = request.getParameter("coordenadas");
         Double clasificacion = null;
         
-        
-        
-        
         boolean exitoso = base.insertarRestaurante(id, nombre, tipoComida, direccion, telefono, horarios, propietarios, coordenadas, clasificacion);
         
         if (exitoso == true){
@@ -117,10 +114,11 @@ public class newServlet extends HttpServlet {
             PrintWriter out = response.getWriter();  
             out.println("<meta charset='UTF-8'>");
             out.println("<head>"
-                        + "<title>Clase Programacion III</title>\n" +
+                        + "<title>Registro Exitoso</title>\n" +
                         "<link rel=\"stylesheet\" href=\"css/bootstrap.min.css\">"
                         + "</head>");
-            out.println("<h1>Se ha ingresado correctamente a la base de Datos</br></h1>");
+            out.println("<div align=\"center\">");
+            out.println("<h1>Se ha ingresado correctamente a la base de Datos</br><hr></h1>");
             out.println("<h1>Nombre: "+nombre+"</h1>");
             out.println("<h1>Tipo de Comida: "+tipoComida+"</h1>");
             out.println("<h1>Direccion: "+direccion+"</h1>");
@@ -128,6 +126,8 @@ public class newServlet extends HttpServlet {
             out.println("<h1>Horarios: "+horarios+"</h1>");
             out.println("<h1>Propietarios: "+propietarios+"</h1>");
             out.println("<h1>Coordenadas: "+coordenadas+"</h1>");
+            out.println("<a class=\"btn btn-primary btn-lg\" href=\"registro.jsp\">Atras</a>");
+            out.println("</div>");
         }else{
             //ex.printStackTrace();
             System.out.println("Error en el try2");

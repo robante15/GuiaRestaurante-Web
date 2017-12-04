@@ -35,10 +35,13 @@
                 <li class="nav-item">
                     <a class="nav-link" href="restaurantes.jsp">Tabla de Restaurantes</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="modificar.jsp">Modificar Registro</a>
+                </li>
             </ul>
         </nav>
         
-        <form action="newServlet" method="POST">        
+        <form action="Enviar_Servlet" method="POST">        
             <div class="container">
                 <form class="form-horizontal" role="form" method="POST" action="/login">
                 

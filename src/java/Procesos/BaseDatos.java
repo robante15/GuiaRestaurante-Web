@@ -62,6 +62,72 @@ public class BaseDatos {
     return exitoso;
     }
     
+    public boolean eliminarRestaurante(int id){
+        boolean exitoso = false;
+        factory = new Factory();
+
+        try {
+            conn = DriverManager.getConnection(url, username, password);
+            String SQLQuery = "DELETE FROM public.restaurantes WHERE id_restaurante="+id+"";
+            st = conn.prepareStatement(SQLQuery);
+            st.executeUpdate();
+            
+            exitoso = true;
+            
+            
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            exitoso = false;
+        }
+        finally{
+            try {
+                st.close();
+            } catch (SQLException ex) {
+                exitoso = false;
+                ex.printStackTrace();
+            }
+        }
+    return exitoso;
+
+    }
+
+    public Restaurante restauranteByID(int idBusqueda){
+        factory = new Factory();
+        Restaurante restorant = null;
+        
+        try {
+            conn = DriverManager.getConnection(url, username, password);
+            String SQLQuery = "SELECT *  FROM public.restaurantes WHERE id_restaurante="+idBusqueda+"";
+            st = conn.prepareStatement(SQLQuery);
+            rs = st.executeQuery();
+            
+            while(rs.next()){
+            int id = rs.getInt("id_restaurante");
+            String nombre = rs.getString("nombre");
+            String tipoComida = rs.getString("tipo_comida");
+            String direccion = rs.getString("direccion");
+            int telefono = rs.getInt("telefono"); 
+            String horarios = rs.getString("horarios");
+            String propietarios = rs.getString("propietario");
+            String coordenadas = rs.getString("coordenadas");
+            Double clasificacion = rs.getDouble("clasificacion");                         
+            restorant = factory.restaurante(id, nombre, tipoComida, direccion, telefono, horarios, propietarios, coordenadas, clasificacion);
+            }
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        finally{
+            try {
+                st.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        return restorant;
+    }
+    
     public ArrayList<Restaurante> obtenerRestaurantes(){
         factory = new Factory();
         ArrayList<Restaurante> listaRestaurantesBD = new ArrayList<Restaurante>();
@@ -73,7 +139,7 @@ public class BaseDatos {
             
             while(rs.next()){
                 
-                int id = rs.getInt("ID_restaurante");
+                int id = rs.getInt("id_restaurante");
                 String nombre = rs.getString("nombre");
                 String tipoComida = rs.getString("tipo_comida");
                 String direccion = rs.getString("direccion");

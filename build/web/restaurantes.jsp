@@ -22,6 +22,7 @@
         <link rel="shortcut icon" href="favicon.png">
     </head>
     
+    <main role="main" class="container">
     <body>
         <div class="container">
 
@@ -39,7 +40,10 @@
                     <a class="nav-link" href="registro.jsp">Registro</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="restaurantes.jsp">Tabla de Estudiantes</a>
+                    <a class="nav-link" href="restaurantes.jsp">Tabla de Restaurantes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="modificar.jsp">Modificar Registro</a>
                 </li>
             </ul>
         </nav>
@@ -104,18 +108,64 @@
                     }
                 %>     
                 </tbody>
-                
               </table>
 
+            <div>
+                <form id="Mod_Del" action="Eliminar_Servlet" method="POST">
+                    <div class="container">
+                        <form class="form-horizontal" role="form" method="POST" action="/login">        
+                            <div class="row">
+                                <div class="col-md-3"></div>
+                                <div class="col-md-6">
+                                    <h2>Eliminar un registro</h2><hr>
+                                </div>
+                            </div>
+                                    
+                            <div class="row">
+                                <div class="col-md-3"></div>
+                                <div class="col-md-6">
+                                    <div class="form-group has-danger">
+                                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                            <input type="text" class="form-control" name="ID" placeholder="ID" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="row" style="padding-top: 1rem">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            <input class="btn btn-warning btn-lg btn-block" onclick="submitForm('modificar.jsp')" value="Modificar">
+                            <input class="btn btn-danger btn-lg btn-block" onclick="submitForm('Eliminar_Servlet')" value="Eliminar">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+                <%
+                String ID;
+                ID = request.getParameter("ID");
+                %>
+
+            <script>
+                function submitForm(action)
+                    {
+                        document.getElementById('Mod_Del').action = action;
+                        document.getElementById('Mod_Del').submit();
+                    }
+            </script>
+
+    </main>
                 
         <footer class="footer">
             <div class="container">
                 <span class="text-muted">Realizado por Roberto Antonio Ortiz Acevedo - OA14002</span>
             </div>
         </footer>
+                
         <script src="js/jquery-3.1.1.slim.min.js"></script>
         <script src="js/tether.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
-        </div>
+
     </body>
 </html>
