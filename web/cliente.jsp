@@ -38,7 +38,7 @@
                     <a class="nav-link" href="main.jsp">Home</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="restaurantes.jsp">Tabla de Restaurantes</a>
+                    <a class="nav-link" href="cliente.jsp">Tabla de Restaurantes</a>
                 </li>
             </ul>
         </nav>
@@ -105,11 +105,60 @@
                 %>     
                 </tbody>
               </table>
+
+              <div>
+                <form id="comentarioAction" action="Eliminar_Servlet" method="POST" autocomplete="off">
+                    <div class="container">
+                        <form class="form-horizontal" role="form" method="POST" action="/login">        
+                            <div class="row">
+                                <div class="col-md-3"></div>
+                                <div class="col-md-6">
+                                    <h2>Ver los comentarios</h2><hr>
+                                </div>
+                            </div>
+                                    
+                            <div class="row">
+                                <div class="col-md-3"></div>
+                                <div class="col-md-6">
+                                    <div class="form-group has-danger">
+                                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                                            <input type="text" class="form-control" name="ID" placeholder="ID" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="row" style="padding-top: 1rem">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            <input class="btn btn-success btn-lg btn-block" onclick="submitForm('comentarios.jsp')" value="Ver Comentarios">
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <%
+            String ID;
+            ID = request.getParameter("ID");
+            %>
+
+        <script>
+            function submitForm(action)
+                {
+                    document.getElementById('comentarioAction').action = action;
+                    document.getElementById('comentarioAction').submit();
+                }
+        </script>
+
     </main>
                 
         <footer class="footer">
             <div class="container">
-                <span class="text-muted">Realizado por Roberto Antonio Ortiz Acevedo - OA14002</span>
+                <span class="text-muted">
+                    Realizado por: 
+                        Roberto Antonio Ortiz Acevedo - OA14002
+                        Carlos Arturo Morales Funes - MF16013
+                </span>
             </div>
         </footer>
                 
